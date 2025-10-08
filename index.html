@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Loja Criativa</title>
+  <title>Lista de Casamento 💍</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -14,35 +14,57 @@
   </section>
 
   <!-- PRODUTOS -->
-  <section class="grid">
-    <div class="card">
-      <img src="imagens/Foto1.png" alt="Produto 1">
-      <p class="desc">Produto 1 Incrível</p>
-      <p class="price">R$ 99,90</p>
-      <a href="https://linkdoproduto1.com" class="btn">Comprar</a>
-    </div>
-
-    <div class="card">
-      <img src="produto2.jpg" alt="Produto 2">
-      <p class="desc">Produto 2 Elegante</p>
-      <p class="price">R$ 129,90</p>
-      <a href="https://linkdoproduto2.com" class="btn">Comprar</a>
-    </div>
-
-    <div class="card">
-      <img src="produto3.jpg" alt="Produto 3">
-      <p class="desc">Produto 3 Moderno</p>
-      <p class="price">R$ 89,90</p>
-      <a href="https://linkdoproduto3.com" class="btn">Comprar</a>
-    </div>
-
-    <div class="card">
-      <img src="produto4.jpg" alt="Produto 4">
-      <p class="desc">Produto 4 Criativo</p>
-      <p class="price">R$ 59,90</p>
-      <a href="https://linkdoproduto4.com" class="btn">Comprar</a>
-    </div>
+  <section class="grid" id="produtosGrid">
+    <!-- Os produtos serão carregados automaticamente pelo Firebase -->
   </section>
+
+  <!-- Firebase + Script -->
+  <script type="module">
+    // Importa SDK Firebase (versão modular)
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+    import { getFirestore, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+
+    // 🔥 CONFIGURAÇÃO DO SEU FIREBASE
+    const firebaseConfig = {
+      apiKey: "SUA_API_KEY_AQUI",
+      authDomain: "SEU_PROJETO.firebaseapp.com",
+      projectId: "SEU_PROJETO",
+      storageBucket: "SEU_PROJETO.appspot.com",
+      messagingSenderId: "123456789",
+      appId: "1:123456789:web:abc123"
+    };
+
+    // Inicializa Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const grid = document.getElementById("produtosGrid");
+
+    // Escuta em tempo real os produtos
+    onSnapshot(collection(db, "produtos"), (snapshot) => {
+      grid.innerHTML = "";
+      snapshot.forEach((doc) => {
+        const produto = doc.data();
+
+        // Cria o card do produto
+        const card = document.createElement("div");
+        card.classList.add("card");
+
+        card.innerHTML = `
+          <img src="${produto.imagem}" alt="${produto.nome}">
+          <p class="desc">${produto.nome}</p>
+          <p class="price">R$ ${produto.preco.toFixed(2)}</p>
+          ${
+            produto.status === "disponivel"
+              ? `<a href="${produto.link}" target="_blank" class="btn">Comprar</a>`
+              : `<a class="btn" style="background-color:#999; cursor:not-allowed;">Esgotado</a>`
+          }
+        `;
+
+        grid.appendChild(card);
+      });
+    });
+  </script>
 
 </body>
 </html>
