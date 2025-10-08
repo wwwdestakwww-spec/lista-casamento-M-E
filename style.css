@@ -1,15 +1,39 @@
-/* Container “grid” — limite máximo de largura total */
+/* RESET */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background-color: #f8f8f8;
+  color: #333;
+}
+
+/* CABEÇALHO */
+header {
+  text-align: center;
+  padding: 30px 10px;
+  background-color: #fff;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+header h1 {
+  font-size: 1.8rem;
+}
+
+/* GRADE PRINCIPAL */
 .grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, 1fr); /* 💻 4 colunas fixas no PC */
   gap: 20px;
-  max-width: 1200px;  /* limite da largura da vitrine */
-  width: 100%;         /* não ultrapassar o container pai */
+  max-width: 1200px;
   margin: 40px auto;
   padding: 0 20px;
 }
 
-/* Card — definir também largura máxima interna para controle */
+/* CARD */
 .card {
   background-color: #fff;
   border-radius: 12px;
@@ -17,40 +41,82 @@
   text-align: center;
   padding: 16px;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-
-  /* estes limites ajudam a não deixar o card esticado demais */
-  max-width: 280px;
-  margin: 0 auto;  /* centraliza dentro da “célula” da grid */
+  
+  /* ✨ Ajuste extra: limita o tamanho do card pra não ficar gigante */
+  max-width: 250px;
+  margin: 0 auto; /* centraliza dentro da célula da grid */
 }
 
-/* Imagem — limitar altura para não “estourar” visualmente */
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+}
+
 .card img {
   width: 100%;
   height: auto;
   border-radius: 8px;
-  max-height: 180px;    /* restrição que ajuda no equilíbrio */
+  max-height: 180px; /* ✨ ligeiramente menor pra parecer Shopee */
   object-fit: cover;
   margin-bottom: 12px;
 }
 
-/* Responsividade — ajustar colunas conforme a largura da tela */
+.desc {
+  font-size: 0.95rem;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.price {
+  font-size: 1.1rem;
+  color: #27ae60;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+/* BOTÃO */
+.btn {
+  display: inline-block;
+  background-color: #27ae60;
+  color: #fff;
+  text-decoration: none;
+  padding: 8px 14px; /* um pouco menor */
+  border-radius: 8px;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+  font-size: 0.9rem;
+}
+
+.btn:hover {
+  background-color: #219150;
+}
+
+/* 📱 RESPONSIVIDADE */
+/* Tablet: 3 colunas */
 @media (max-width: 1024px) {
   .grid {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
+/* Celular: 2 colunas fixas */
 @media (max-width: 768px) {
   .grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
     padding: 10px;
   }
+
   .card {
     padding: 10px;
-    max-width: none;   /* deixa ocupar toda a célula da grid no celular */
+    max-width: none; /* ocupa bem o espaço disponível */
   }
+
   .card img {
-    max-height: 160px;
+    max-height: 150px;
+  }
+
+  header h1 {
+    font-size: 1.4rem;
   }
 }
