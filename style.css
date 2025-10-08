@@ -11,11 +11,12 @@ body {
   color: #333;
 }
 
-/* 🏷️ BANNER */
+/* BANNER */
 .banner {
   width: 100%;
   max-height: 300px;
   overflow: hidden;
+  margin-bottom: 20px;
 }
 
 .banner img {
@@ -25,13 +26,13 @@ body {
   object-fit: cover;
 }
 
-/* 💚 GRADE DE PRODUTOS */
+/* GRID DE PRODUTOS */
 .grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, 1fr); /* desktop: 4 por linha */
   gap: 20px;
   max-width: 1200px;
-  margin: 40px auto;
+  margin: 0 auto 40px auto;
   padding: 0 20px;
 }
 
@@ -71,7 +72,7 @@ body {
   margin-bottom: 12px;
 }
 
-/* 🟢 BOTÃO */
+/* BOTÃO VERDE */
 .btn {
   display: inline-block;
   background-color: #27ae60;
@@ -88,7 +89,8 @@ body {
   transform: scale(1.05);
 }
 
-/* 📱 RESPONSIVIDADE */
+/* RESPONSIVIDADE */
+
 /* Tablet */
 @media (max-width: 1024px) {
   .grid {
@@ -96,10 +98,10 @@ body {
   }
 }
 
-/* Celular */
+/* Mobile */
 @media (max-width: 768px) {
   .grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr); /* garante 2 por linha fixos */
     gap: 12px;
     padding: 10px;
   }
@@ -113,7 +115,7 @@ body {
   }
 
   .btn {
-    background-color: #27ae60;
+    background-color: #27ae60; /* garante verdinho no mobile */
     padding: 8px 12px;
     font-size: 0.9rem;
   }
