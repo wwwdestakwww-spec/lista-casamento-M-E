@@ -120,3 +120,11 @@ header h1 {
     font-size: 1.4rem;
   }
 }
+/* ✅ Correção visual para o botão no mobile */
+.btn {
+  -webkit-appearance: none; /* remove estilos automáticos do iOS/Safari */
+  appearance: none;
+  background-color: #27ae60 !important; /* força o verde padrão */
+  border: none;
+  outline: none;
+}
