@@ -1,39 +1,15 @@
-/* RESET */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: "Poppins", sans-serif;
-}
-
-body {
-  background-color: #f8f8f8;
-  color: #333;
-}
-
-/* CABEÇALHO */
-header {
-  text-align: center;
-  padding: 30px 10px;
-  background-color: #fff;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-
-header h1 {
-  font-size: 1.8rem;
-}
-
-/* GRADE PRINCIPAL */
+/* Container “grid” — limite máximo de largura total */
 .grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 💻 4 colunas fixas no PC */
+  grid-template-columns: repeat(4, 1fr);
   gap: 20px;
-  max-width: 1200px;
+  max-width: 1200px;  /* limite da largura da vitrine */
+  width: 100%;         /* não ultrapassar o container pai */
   margin: 40px auto;
   padding: 0 20px;
 }
 
-/* CARD */
+/* Card — definir também largura máxima interna para controle */
 .card {
   background-color: #fff;
   border-radius: 12px;
@@ -41,76 +17,40 @@ header h1 {
   text-align: center;
   padding: 16px;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  /* estes limites ajudam a não deixar o card esticado demais */
+  max-width: 280px;
+  margin: 0 auto;  /* centraliza dentro da “célula” da grid */
 }
 
-.card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
-}
-
+/* Imagem — limitar altura para não “estourar” visualmente */
 .card img {
   width: 100%;
   height: auto;
   border-radius: 8px;
-  max-height: 200px;
+  max-height: 180px;    /* restrição que ajuda no equilíbrio */
   object-fit: cover;
   margin-bottom: 12px;
 }
 
-.desc {
-  font-size: 1rem;
-  font-weight: 500;
-  margin-bottom: 8px;
-}
-
-.price {
-  font-size: 1.1rem;
-  color: #27ae60;
-  font-weight: 600;
-  margin-bottom: 12px;
-}
-
-/* BOTÃO */
-.btn {
-  display: inline-block;
-  background-color: #27ae60;
-  color: #fff;
-  text-decoration: none;
-  padding: 10px 18px;
-  border-radius: 8px;
-  font-weight: 500;
-  transition: background-color 0.2s ease;
-}
-
-.btn:hover {
-  background-color: #219150;
-}
-
-/* 📱 RESPONSIVIDADE */
-/* Tablet: 3 colunas */
+/* Responsividade — ajustar colunas conforme a largura da tela */
 @media (max-width: 1024px) {
   .grid {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
-/* Celular: 2 colunas fixas */
 @media (max-width: 768px) {
   .grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
     padding: 10px;
   }
-
   .card {
     padding: 10px;
+    max-width: none;   /* deixa ocupar toda a célula da grid no celular */
   }
-
   .card img {
     max-height: 160px;
-  }
-
-  header h1 {
-    font-size: 1.4rem;
   }
 }
