@@ -321,5 +321,32 @@ document.querySelectorAll('.btn').forEach(btn => {
 });
 </script>
 
+  <script>
+window.addEventListener('load', () => {
+  const quantidade = 30;
+  for(let i=0; i<quantidade; i++){
+    const confete = document.createElement('div');
+    confete.classList.add('confete-entrada');
+
+    const x = Math.random() * window.innerWidth;
+    const y = 0; // topo
+    confete.style.left = x + 'px';
+    confete.style.top = y + 'px';
+
+    const cores = ['#fce18a','#ff8177','#9fe6a0','#d0e6ff','#ffb3f0'];
+    confete.style.backgroundColor = cores[Math.floor(Math.random()*cores.length)];
+
+    const size = Math.random()*6 + 6;
+    confete.style.width = size + 'px';
+    confete.style.height = size + 'px';
+
+    document.body.appendChild(confete);
+
+    setTimeout(() => { confete.remove(); }, 3000);
+  }
+});
+</script>
+
+
 </body>
 </html>
