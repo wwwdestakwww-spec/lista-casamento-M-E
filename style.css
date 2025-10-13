@@ -176,3 +176,19 @@ body {
   100% { transform: translateY(200px) rotate(360deg); opacity: 0; }
 }
 
+.confete-entrada {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  opacity: 0.9;
+  pointer-events: none;
+  z-index: 9999;
+  animation: cair-entrada 3s linear forwards;
+}
+
+@keyframes cair-entrada {
+  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(250px) rotate(360deg); opacity: 0; }
+}
+
