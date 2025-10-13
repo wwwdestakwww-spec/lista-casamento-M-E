@@ -320,10 +320,11 @@ document.querySelectorAll('.btn').forEach(btn => {
   });
 });
 </script>
-<script>
+
+  <script>
 (function() {
   function explodeConfetti() {
-    const total = 120;
+    const total = 120; // número de confetes
     for (let i = 0; i < total; i++) {
       const confete = document.createElement('div');
       confete.classList.add('confete-explode');
@@ -334,26 +335,32 @@ document.querySelectorAll('.btn').forEach(btn => {
       confete.style.height = size + 'px';
       confete.style.backgroundColor = `hsl(${Math.random() * 360}, 80%, 60%)`;
 
+      // posição inicial aleatória perto do centro
+      const x = window.innerWidth/2 + (Math.random() - 0.5) * 100;
+      const y = window.innerHeight/2 + (Math.random() - 0.5) * 100;
+      confete.style.left = x + 'px';
+      confete.style.top = y + 'px';
+
       const angle = Math.random() * 2 * Math.PI;
       const velocity = Math.random() * 14 + 6;
       const dx = Math.cos(angle) * velocity;
       const dy = Math.sin(angle) * velocity;
       const gravity = 0.35;
 
-      let x = window.innerWidth / 2;
-      let y = window.innerHeight / 2;
+      let posX = x;
+      let posY = y;
       let rotation = Math.random() * 360;
       const spin = Math.random() * 10 - 5;
 
       function animate() {
-        y += dy;
-        x += dx;
+        posX += dx;
+        posY += dy;
         dy += gravity;
         rotation += spin;
 
-        confete.style.transform = `translate(${x - window.innerWidth / 2}px, ${y - window.innerHeight / 2}px) rotate(${rotation}deg)`;
+        confete.style.transform = `translate(${posX - x}px, ${posY - y}px) rotate(${rotation}deg)`;
 
-        if (y < window.innerHeight + 50) {
+        if (posY < window.innerHeight + 50 && posX > -50 && posX < window.innerWidth + 50) {
           requestAnimationFrame(animate);
         } else {
           confete.remove();
@@ -367,6 +374,7 @@ document.querySelectorAll('.btn').forEach(btn => {
   window.addEventListener('load', explodeConfetti);
 })();
 </script>
+
 
 
 
