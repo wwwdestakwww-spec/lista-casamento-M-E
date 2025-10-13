@@ -120,3 +120,26 @@ body {
     font-size: 0.9rem;
   }
 }
+
+.aviso {
+  border: 2px solid red;
+  padding: 15px;
+  margin: 20px auto;
+  max-width: 600px;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  border-radius: 10px;
+  background: #fff8f8;
+  animation: piscar 1.5s infinite;
+}
+
+@keyframes piscar {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.9);
+  }
+}
+
