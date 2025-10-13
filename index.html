@@ -321,31 +321,62 @@ document.querySelectorAll('.btn').forEach(btn => {
 });
 </script>
 
-  <script>
-window.addEventListener('load', () => {
-  const quantidade = 30;
-  for(let i=0; i<quantidade; i++){
-    const confete = document.createElement('div');
-    confete.classList.add('confete-entrada');
+<script>
+(function() {
+  function explodeConfetti() {
+    const total = 120; // quantidade de confetes — pode aumentar!
+    for (let i = 0; i < total; i++) {
+      const confete = document.createElement('div');
+      confete.classList.add('confete-explode'); // classe exclusiva
+      document.body.appendChild(confete);
 
-    const x = Math.random() * window.innerWidth;
-    const y = 0; // topo
-    confete.style.left = x + 'px';
-    confete.style.top = y + 'px';
+      const size = Math.random() * 10 + 6;
+      confete.style.width = `${size}px`;
+      confete.style.height = `${size}px`;
+      confete.style.backgroundColor = `hsl(${Math.random() * 360}, 80%, 60%)`;
+      confete.style.position = 'fixed';
+      confete.style.left = `${window.innerWidth / 2}px`;
+      confete.style.top = `${window.innerHeight / 2}px`;
+      confete.style.borderRadius = '2px';
+      confete.style.opacity = 0.9;
+      confete.style.pointerEvents = 'none';
+      confete.style.zIndex = 99999;
 
-    const cores = ['#fce18a','#ff8177','#9fe6a0','#d0e6ff','#ffb3f0'];
-    confete.style.backgroundColor = cores[Math.floor(Math.random()*cores.length)];
+      const angle = Math.random() * 2 * Math.PI;
+      const velocity = Math.random() * 14 + 6;
+      const dx = Math.cos(angle) * velocity;
+      const dy = Math.sin(angle) * velocity;
+      const gravity = 0.35;
 
-    const size = Math.random()*6 + 6;
-    confete.style.width = size + 'px';
-    confete.style.height = size + 'px';
+      let x = window.innerWidth / 2;
+      let y = window.innerHeight / 2;
+      let rotation = Math.random() * 360;
+      const spin = Math.random() * 10 - 5;
 
-    document.body.appendChild(confete);
+      function animate() {
+        y += dy;
+        x += dx;
+        dy += gravity;
+        rotation += spin;
 
-    setTimeout(() => { confete.remove(); }, 3000);
+        confete.style.transform = `translate(${x - window.innerWidth / 2}px, ${y - window.innerHeight / 2}px) rotate(${rotation}deg)`;
+
+        if (y < window.innerHeight + 50) {
+          requestAnimationFrame(animate);
+        } else {
+          confete.remove();
+        }
+      }
+
+      animate();
+    }
   }
-});
+
+  // dispara os confetes assim que o site carregar
+  window.addEventListener('load', explodeConfetti);
+})();
 </script>
+
 
 
 </body>
