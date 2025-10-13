@@ -180,10 +180,22 @@ body {
   position: fixed;
   width: 8px;
   height: 8px;
-  border-radius: 2px;
+  border-radius: 50%;
   opacity: 0.9;
   pointer-events: none;
   z-index: 99999;
+  animation: cair-explode 3s forwards;
+}
+
+@keyframes cair-explode {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(300px) rotate(720deg);
+    opacity: 0;
+  }
 }
 
 
