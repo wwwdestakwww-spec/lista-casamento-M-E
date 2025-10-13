@@ -121,25 +121,45 @@ body {
   }
 }
 
+/* AVISO DE TRANSPARÊNCIA - colocar no final do CSS */
 .aviso {
-  border: 2px solid red;
-  padding: 15px;
-  margin: 20px auto;
-  max-width: 800px;
+  position: relative; /* troque para fixed se quiser que fique sempre visível */
+  z-index: 9999;
+  border: 2px solid #e53935;
+  padding: 14px 18px;
+  margin: 18px auto;
+  max-width: 920px;
   text-align: center;
   font-family: "Poppins", sans-serif;
-  font-size: 16px;
+  font-size: 15px;
   border-radius: 10px;
   background: #fff8f8;
-  animation: piscar 1.5s infinite;
+  color: #222;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+  animation: piscar 1.6s infinite;
+  -webkit-animation: piscar 1.6s infinite;
+  display: block;
 }
 
+/* Evita que a animação seja cortada se o pai tiver overflow hidden */
+.aviso { overflow: visible; }
+
+/* Keyframes */
 @keyframes piscar {
   0%, 100% {
-    box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+    box-shadow: 0 0 8px rgba(229, 57, 53, 0.35), inset 0 0 0 0 rgba(0,0,0,0);
+    transform: translateY(0);
   }
   50% {
-    box-shadow: 0 0 20px rgba(255, 0, 0, 0.9);
+    box-shadow: 0 0 22px rgba(229, 57, 53, 0.6), inset 0 0 0 2px rgba(229,57,53,0.06);
+    transform: translateY(-2px);
   }
 }
+
+/* Fallback se a animação estiver sendo sobrescrita — força com !important */
+.aviso {
+  animation: piscar 1.6s infinite !important;
+  -webkit-animation: piscar 1.6s infinite !important;
+}
+
 
