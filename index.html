@@ -320,27 +320,19 @@ document.querySelectorAll('.btn').forEach(btn => {
   });
 });
 </script>
-
 <script>
 (function() {
   function explodeConfetti() {
-    const total = 120; // quantidade de confetes — pode aumentar!
+    const total = 120;
     for (let i = 0; i < total; i++) {
       const confete = document.createElement('div');
-      confete.classList.add('confete-explode'); // classe exclusiva
+      confete.classList.add('confete-explode');
       document.body.appendChild(confete);
 
       const size = Math.random() * 10 + 6;
-      confete.style.width = `${size}px`;
-      confete.style.height = `${size}px`;
+      confete.style.width = size + 'px';
+      confete.style.height = size + 'px';
       confete.style.backgroundColor = `hsl(${Math.random() * 360}, 80%, 60%)`;
-      confete.style.position = 'fixed';
-      confete.style.left = `${window.innerWidth / 2}px`;
-      confete.style.top = `${window.innerHeight / 2}px`;
-      confete.style.borderRadius = '2px';
-      confete.style.opacity = 0.9;
-      confete.style.pointerEvents = 'none';
-      confete.style.zIndex = 99999;
 
       const angle = Math.random() * 2 * Math.PI;
       const velocity = Math.random() * 14 + 6;
@@ -372,10 +364,10 @@ document.querySelectorAll('.btn').forEach(btn => {
     }
   }
 
-  // dispara os confetes assim que o site carregar
   window.addEventListener('load', explodeConfetti);
 })();
 </script>
+
 
 
 
