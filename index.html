@@ -321,62 +321,43 @@ document.querySelectorAll('.btn').forEach(btn => {
 });
 </script>
 
-  <script>
+<script>
 (function() {
   function explodeConfetti() {
-    const total = 120; // número de confetes
+    const total = 60; // confetes
+
     for (let i = 0; i < total; i++) {
       const confete = document.createElement('div');
       confete.classList.add('confete-explode');
-      document.body.appendChild(confete);
 
-      const size = Math.random() * 10 + 6;
+      // posição horizontal aleatória
+      confete.style.left = Math.random() * window.innerWidth + 'px';
+      confete.style.top = Math.random() * 100 + 'px'; // topo da tela
+
+      // cores aleatórias
+      const cores = ['#fce18a','#ff8177','#9fe6a0','#d0e6ff','#ffb3f0'];
+      confete.style.backgroundColor = cores[Math.floor(Math.random() * cores.length)];
+
+      // tamanho aleatório
+      const size = Math.random() * 10 + 5;
       confete.style.width = size + 'px';
       confete.style.height = size + 'px';
-      confete.style.backgroundColor = `hsl(${Math.random() * 360}, 80%, 60%)`;
 
-      // posição inicial aleatória perto do centro
-      const x = window.innerWidth/2 + (Math.random() - 0.5) * 100;
-      const y = window.innerHeight/2 + (Math.random() - 0.5) * 100;
-      confete.style.left = x + 'px';
-      confete.style.top = y + 'px';
+      // tempo de animação aleatório para dispersar confetes
+      confete.style.animationDuration = (Math.random() * 1.5 + 2.5) + 's';
 
-      const angle = Math.random() * 2 * Math.PI;
-      const velocity = Math.random() * 14 + 6;
-      const dx = Math.cos(angle) * velocity;
-      const dy = Math.sin(angle) * velocity;
-      const gravity = 0.35;
+      document.body.appendChild(confete);
 
-      let posX = x;
-      let posY = y;
-      let rotation = Math.random() * 360;
-      const spin = Math.random() * 10 - 5;
-
-      function animate() {
-        posX += dx;
-        posY += dy;
-        dy += gravity;
-        rotation += spin;
-
-        confete.style.transform = `translate(${posX - x}px, ${posY - y}px) rotate(${rotation}deg)`;
-
-        if (posY < window.innerHeight + 50 && posX > -50 && posX < window.innerWidth + 50) {
-          requestAnimationFrame(animate);
-        } else {
-          confete.remove();
-        }
-      }
-
-      animate();
+      // remove após a animação
+      setTimeout(() => {
+        confete.remove();
+      }, 4000);
     }
   }
 
   window.addEventListener('load', explodeConfetti);
 })();
 </script>
-
-
-
 
 
 </body>
