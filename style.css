@@ -125,13 +125,13 @@ body {
 .aviso {
   position: relative; /* troque para fixed se quiser que fique sempre visível */
   z-index: 9999;
-  border: 2px solid #b17744;
+  border: 2px solid #b17744; /* tom da borda atualizado */
   padding: 14px 18px;
   margin: 14px auto;
   max-width: 920px;
   text-align: center;
   font-family: "Poppins", sans-serif;
-  font-size: 8px;
+  font-size: 14px; /* ajustei para ficar legível */
   border-radius: 10px;
   background: #fff9f0;
   color: #636b48;
@@ -139,19 +139,17 @@ body {
   animation: piscar 1.6s infinite;
   -webkit-animation: piscar 1.6s infinite;
   display: block;
+  overflow: visible;
 }
 
-/* Evita que a animação seja cortada se o pai tiver overflow hidden */
-.aviso { overflow: visible; }
-
-/* Keyframes */
+/* Keyframes - piscando no tom da borda */
 @keyframes piscar {
   0%, 100% {
-    box-shadow: 0 0 8px rgba(229, 57, 53, 0.35), inset 0 0 0 0 rgba(0,0,0,0);
+    box-shadow: 0 0 8px rgba(177, 119, 68, 0.35), inset 0 0 0 0 rgba(0,0,0,0);
     transform: translateY(0);
   }
   50% {
-    box-shadow: 0 0 22px rgba(229, 57, 53, 0.6), inset 0 0 0 2px rgba(229,57,53,0.06);
+    box-shadow: 0 0 22px rgba(177, 119, 68, 0.6), inset 0 0 0 2px rgba(177,119,68,0.06);
     transform: translateY(-2px);
   }
 }
@@ -161,5 +159,3 @@ body {
   animation: piscar 1.6s infinite !important;
   -webkit-animation: piscar 1.6s infinite !important;
 }
-
-
