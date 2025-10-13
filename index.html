@@ -284,6 +284,42 @@ Assim que cada item chegar, vamos mostrar tudinho por aqui<br>💖
     </div>
 
   </section>
+  
+<script>
+document.querySelectorAll('.btn').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    // cria 20 confetes ao clicar
+    const quantidade = 20;
+
+    for(let i=0; i<quantidade; i++){
+      const confete = document.createElement('div');
+      confete.classList.add('confete');
+
+      // posição inicial aleatória dentro do botão
+      const rect = e.target.getBoundingClientRect();
+      const x = rect.left + Math.random() * rect.width + window.scrollX;
+      const y = rect.top + Math.random() * rect.height + window.scrollY;
+
+      confete.style.left = x + 'px';
+      confete.style.top = y + 'px';
+
+      // cores aleatórias
+      const cores = ['#fce18a','#ff8177','#9fe6a0','#d0e6ff','#ffb3f0'];
+      confete.style.backgroundColor = cores[Math.floor(Math.random()*cores.length)];
+
+      // tamanho aleatório
+      const size = Math.random()*6 + 6;
+      confete.style.width = size + 'px';
+      confete.style.height = size + 'px';
+
+      document.body.appendChild(confete);
+
+      // remove confete após animação
+      setTimeout(() => { confete.remove(); }, 1200);
+    }
+  });
+});
+</script>
 
 </body>
 </html>
