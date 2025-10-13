@@ -159,3 +159,20 @@ body {
   animation: piscar 1.6s infinite !important;
   -webkit-animation: piscar 1.6s infinite !important;
 }
+
+.confete {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  opacity: 0.9;
+  pointer-events: none;
+  z-index: 9999;
+  animation: cair 1.2s linear forwards;
+}
+
+@keyframes cair {
+  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(200px) rotate(360deg); opacity: 0; }
+}
+
