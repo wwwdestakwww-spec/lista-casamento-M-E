@@ -125,7 +125,7 @@ body {
 .aviso {
   position: relative; /* troque para fixed se quiser que fique sempre visível */
   z-index: 9999;
-  border: 2px solid #e53935;
+  border: 2px solid #b17744;
   padding: 14px 18px;
   margin: 14px auto;
   max-width: 920px;
