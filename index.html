@@ -391,14 +391,53 @@ document.querySelectorAll('.btn').forEach(btn => {
 
   
 <!--  apartir daqui é teste -->
-  <script>
-  const imagens = document.querySelectorAll('.lista-produtos img');
+<script>
+  (function(){
+    // pega todas as imagens dentro dos cards
+    const imgs = document.querySelectorAll('.grid .card img');
 
-  imagens.forEach(img => {
-    img.addEventListener('click', () => {
-      img.classList.toggle('ativo');
+    // função para remover zoom de todas as imagens
+    function removerTodosZoom() {
+      imgs.forEach(i => i.classList.remove('zoom-ativo'));
+    }
+
+    imgs.forEach(img => {
+      // quando clicar na imagem: alterna zoom e impede propagação para o document
+      img.addEventListener('click', function(e){
+        e.stopPropagation();
+        this.classList.toggle('zoom-ativo');
+      });
+
+      // opcional: se preferir que o hover não interfira quando já está com zoom
+      img.addEventListener('mouseenter', function(){
+        // nada extra aqui — hover é controlado via CSS
+      });
     });
-  });
+
+    // clicar em qualquer outro lugar fecha o zoom
+    document.addEventListener('click', function(e){
+      // se o clique não foi numa imagem da grid, remove zoom
+      // (como já bloqueamos propagação nos clicks das imagens, esse listener vai capturar cliques fora)
+      removerTodosZoom();
+    });
+
+    // ESC fecha também
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape' || e.key === 'Esc') removerTodosZoom();
+    });
+
+    // útil em telas pequenas: toque em outro card fecha o anterior
+    imgs.forEach(img => {
+      img.addEventListener('touchstart', function(e){
+        // em touch, ao tocar numa imagem que já não está ativa, remove de outras e ativa esta
+        if (!this.classList.contains('zoom-ativo')) {
+          removerTodosZoom();
+          this.classList.add('zoom-ativo');
+        }
+        // deixar propagação normal pra poder abrir/fechar com toque subsequente
+      }, {passive: true});
+    });
+  })();
 </script>
 
 
