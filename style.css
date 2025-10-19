@@ -197,21 +197,63 @@ body {
     opacity: 0;
   }
 }
-.lista-produtos img {
-  transition: transform 0.3s ease;
+
+
+
+/* ===== ZOOM: hover + click ===== */
+.grid .card {
+  overflow: visible; /* garante que a imagem em z-index fique visível */
+  position: relative;
+}
+
+/* base da imagem */
+.grid .card img {
+  display: block;
+  width: 100%;
+  height: 150px; /* mantém sua altura atual — ajuste se quiser */
+  object-fit: cover;
+  border-radius: 8px;
+  transition: transform 0.28s cubic-bezier(.2,.8,.2,1), box-shadow 0.28s;
+  transform-origin: center center;
   cursor: pointer;
 }
 
-/* Zoom ao passar o mouse */
-.lista-produtos img:hover {
-  transform: scale(1.2);
-  z-index: 10;
+/* zoom temporário no hover */
+.grid .card img:hover {
+  transform: scale(1.12);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.14);
+  z-index: 30;
+  position: relative;
 }
 
-/* Zoom mantido ao clicar */
-.lista-produtos img.ativo {
-  transform: scale(1.2);
-  z-index: 10;
+/* zoom mantido quando a classe for aplicada (click) */
+.grid .card img.zoom-ativo {
+  transform: scale(1.18);
+  box-shadow: 0 28px 60px rgba(0,0,0,0.18);
+  z-index: 999;
+  position: relative;
+}
+
+/* se quiser, diminua transbordamento vertical do card para evitar que o conteúdo pule */
+.grid { overflow: visible; }
+
+/* pequena melhoria visual: evita que texto seja coberto ao fazer zoom */
+/* opcional — remova se quiser o comportamento original */
+.grid .card .desc,
+.grid .card .price,
+.grid .card .btn,
+.grid .card small {
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+/* quando a imagem está zoom-ativa, diminui levemente a opacidade do conteúdo do card */
+.grid .card img.zoom-ativo + .desc,
+.grid .card img.zoom-ativo + .desc + .price,
+.grid .card img.zoom-ativo ~ .desc,
+.grid .card img.zoom-ativo ~ .price,
+.grid .card img.zoom-ativo ~ .btn,
+.grid .card img.zoom-ativo ~ small {
+  opacity: 0.95;
 }
 
 
