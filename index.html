@@ -389,6 +389,55 @@ document.querySelectorAll('.btn').forEach(btn => {
 })();
 </script>
 
+  
+<!--  apartir daqui é teste -->
+  <div class="produtos"></div>
+
+<script>
+const produtos = [
+  "produto1.jpg",
+  "produto2.jpg",
+  "produto3.jpg",
+  "produto4.jpg",
+  "produto5.jpg"
+];
+
+const container = document.querySelector('.produtos');
+
+produtos.forEach(src => {
+  const img = document.createElement('img');
+  img.src = src;
+  img.alt = "Produto";
+  img.classList.add('zoom');
+  container.appendChild(img);
+});
+
+container.addEventListener('click', e => {
+  if (e.target.tagName === 'IMG') {
+    e.target.classList.toggle('active');
+  }
+});
+</script>
+
+<style>
+.produtos {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.produtos img {
+  width: 150px;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+.produtos img.active {
+  transform: scale(1.2);
+  z-index: 10;
+}
+</style>
+
 
 </body>
 </html>
